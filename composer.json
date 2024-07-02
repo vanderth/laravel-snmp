@@ -46,7 +46,7 @@
         "Vanderth\\Snmp\\Providers\\SnmpPollerServiceProvider"
       ],
       "aliases": {
-        "SnmpPoller": "Vanderth\\Snmp\\Facades\\SnmpPollerFacade"
+        "SnmpPoller": "Vanderth\\Snmp\\Facades\\SnmpPoller"
       }
     }
   },
