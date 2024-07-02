@@ -1,0 +1,10 @@
+.idea
+.vscode
+.phpunit.result.cache
+.phpunit.cache
+.env
+phpunit.xml.bak
+build
+vendor
+node_modules
+composer.lock
