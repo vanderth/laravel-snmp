@@ -48,7 +48,7 @@ At php.ini enable the extension ext-php.
 You can install the package via composer:
 
 ```bash
-composer require acamposm/snmp-poller
+composer require vanderth/laravel-snmp
 ```
 
 ### Publish vendor assets
