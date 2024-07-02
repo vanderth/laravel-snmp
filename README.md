@@ -64,8 +64,8 @@ php artisan snmp:install
 ### Single SNMP Poller class
 
 ```php
-use Acamposm\SnmpPoller\SnmpPoller;
-use Acamposm\SnmpPoller\Pollers\IfTablePoller;
+use Vanderth\Snmp\SnmpPoller;
+use Vanderth\Snmp\Pollers\IfTablePoller;
 use SNMP;
 
 $session = new SNMP(SNMP::VERSION_2C, '192.168.10.254', 'csnmpv2c');
@@ -144,7 +144,7 @@ The output of an SNMP query to the snmp-agent of a network host with a single SN
       21 => [ ... ],
       22 => [ ... ],
     ],
-    +"poller": "Acamposm\SnmpPoller\Pollers\IfTablePoller",
+    +"poller": "Vanderth\Snmp\Pollers\IfTablePoller",
     +"result": "OK",
     +"table": "ifTable",
   },
@@ -154,22 +154,18 @@ The output of an SNMP query to the snmp-agent of a network host with a single SN
 ### Multiple SNMP Pollers classes
 
 ```php
-use Acamposm\SnmpPoller\SnmpPoller;
-use Acamposm\SnmpPoller\Pollers\IfTablePoller;
-use Acamposm\SnmpPoller\Pollers\IfExtendedTablePoller;
-use Acamposm\SnmpPoller\Pollers\EntPhysicalTablePoller;
-use Acamposm\SnmpPoller\Pollers\LldpRemoteTablePoller;
+use Vanderth\Snmp\SnmpPoller;
+use Vanderth\Snmp\Pollers\IfTablePoller;
+use Vanderth\Snmp\Pollers\IfExtendTablePoller;
 use SNMP;
 
-$session = new SNMP(SNMP::VERSION_2C, '192.168.10.254', 'csnmpv2c');
+$session = new SNMP(SnmpPoller::V2c, 'localhost', 'public');
 
 $poller = new SnmpPoller();
 
 $pollerClasses = [
    IfTablePoller::class,
-   IfExtendedTablePoller::class,
-   EntPhysicalTablePoller::class,
-   LldpRemoteTablePoller::class,
+   IfExtendTablePoller::class,
 ];
 
 $poller->setSnmpSession($session)
@@ -246,11 +242,11 @@ The output of an SNMP query to the snmp-agent of a network host with multiple SN
       21 => [ ... ],
       22 => [ ... ],
     ],
-    +"poller": "Acamposm\SnmpPoller\Pollers\IfTablePoller",
+    +"poller": "Vanderth\Snmp\Pollers\IfTablePoller",
     +"result": "OK",
     +"table": "ifTable",
   },
-  "IfExtendedTablePoller" => {
+  "IfExtendTablePoller" => {
     +"data" => [
       1 => [
         "ifName" => "wan1",
@@ -315,103 +311,10 @@ The output of an SNMP query to the snmp-agent of a network host with multiple SN
       21 => [ ... ],
       22 => [ ... ],
     ],
-    +"poller" => "Acamposm\SnmpPoller\Pollers\IfExtendedTablePoller",
+    +"poller" => "Vanderth\Snmp\Pollers\IfExtendedTablePoller",
     +"result" => "OK",
     +"table" => "ifXTable",
-  },
-  "EntPhysicalTablePoller" => {
-    +"data" => [
-      1 => [
-        "entPhysicalDescr" => "Fortinet FWF_51E, HW Serial#: FWF51E3U16000691",
-        "entPhysicalVendorType" => ".1.3.6.1.4.1.12356.516.516.0",
-        "entPhysicalContainedIn" => 0,
-        "entPhysicalClass" => 3,
-        "entPhysicalParentRelPos" => -1,
-        "entPhysicalName" => "FWF_51E",
-        "entPhysicalHardwareRev" => "",
-        "entPhysicalFirmwareRev" => "",
-        "entPhysicalSoftwareRev" => "FortiWiFi-51E v6.2.3,build1066,191218 (GA)",
-        "entPhysicalSerialNum" => "FWF51E3U16000691",
-        "entPhysicalMfgName" => "Fortinet",
-        "entPhysicalModelName" => "FWF_51E",
-        "entPhysicalAlias" => "",
-        "entPhysicalAssetID" => "",
-        "entPhysicalIsFRU" => 1,
-      ],
-      2 => [
-        "entPhysicalDescr" => "Ethernet Port, Vitual Domain: root",
-        "entPhysicalVendorType" => ".0.0.0",
-        "entPhysicalContainedIn" => 1,
-        "entPhysicalClass" => 10,
-        "entPhysicalParentRelPos" => 1,
-        "entPhysicalName" => "wan1",
-        "entPhysicalHardwareRev" => "",
-        "entPhysicalFirmwareRev" => "",
-        "entPhysicalSoftwareRev" => "",
-        "entPhysicalSerialNum" => "",
-        "entPhysicalMfgName" => "",
-        "entPhysicalModelName" => "",
-        "entPhysicalAlias" => "",
-        "entPhysicalAssetID" => "",
-        "entPhysicalIsFRU" => 2,
-      ],
-      3 => [
-        "entPhysicalDescr" => "Ethernet Port, Vitual Domain: root",
-        "entPhysicalVendorType" => ".0.0.0",
-        "entPhysicalContainedIn" => 1,
-        "entPhysicalClass" => 10,
-        "entPhysicalParentRelPos" => 2,
-        "entPhysicalName" => "wan2",
-        "entPhysicalHardwareRev" => "",
-        "entPhysicalFirmwareRev" => "",
-        "entPhysicalSoftwareRev" => "",
-        "entPhysicalSerialNum" => "",
-        "entPhysicalMfgName" => "",
-        "entPhysicalModelName" => "",
-        "entPhysicalAlias" => "",
-        "entPhysicalAssetID" => "",
-        "entPhysicalIsFRU" => 2,
-      ],
-      4 => [
-        "entPhysicalDescr" => "Ethernet Port, Vitual Domain: root",
-        "entPhysicalVendorType" => ".0.0.0",
-        "entPhysicalContainedIn" => 1,
-        "entPhysicalClass" => 10,
-        "entPhysicalParentRelPos" => 3,
-        "entPhysicalName" => "modem",
-        "entPhysicalHardwareRev" => "",
-        "entPhysicalFirmwareRev" => "",
-        "entPhysicalSoftwareRev" => "",
-        "entPhysicalSerialNum" => "",
-        "entPhysicalMfgName" => "",
-        "entPhysicalModelName" => "",
-        "entPhysicalAlias" => "",
-        "entPhysicalAssetID" => "",
-        "entPhysicalIsFRU" => 2,
-      ],
-    ],
-    +"poller": "Acamposm\SnmpPoller\Pollers\EntPhysicalTablePoller",
-    +"result": "OK",
-    +"table": "entPhysical",
-  },
-  "LldpRemoteTablePoller" => {
-    +"data" => [
-      "710800216.10.1" => [
-        "lldpRemChassisIdSubtype" => 4,
-        "lldpRemChassisId" => "2C:FA:A2:27:2F:5C",
-        "lldpRemPortIdSubtype" => 7,
-        "lldpRemPortId" => "1021",
-        "lldpRemPortDesc" => "Alcatel-Lucent Enterprise 1/21",
-        "lldpRemSysName" => "WTG-OS6450P24-SW01",
-        "lldpRemSysDesc" => "Alcatel-Lucent Enterprise OS6450-P24 6.7.2.191.R04 GA, June 20, 2018.",
-        "lldpRemSysCapSupported" => "(",
-        "lldpRemSysCapEnabled" => "(",
-      ],
-    ],
-    +"poller" => "Acamposm\SnmpPoller\Pollers\LldpRemoteTablePoller",
-    +"result" => "OK",
-    +"table" => "lldpRemTable",
-  },
+  }
 ]
 ```
 
