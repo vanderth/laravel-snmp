@@ -1,7 +1,6 @@
 {
   "name": "vanderth/laravel-snmp",
   "description": "SNMP Package for query network with extending php-snmp, compatible with Laravel Framework",
-  "type": "library",
   "license": "MIT",
   "authors": [
     {
