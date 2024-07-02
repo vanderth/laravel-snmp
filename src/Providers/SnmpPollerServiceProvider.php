@@ -3,6 +3,7 @@
 namespace Vanderth\Snmp\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Vanderth\Snmp\Console\Commands\PublishConfigCommand;
 use Vanderth\Snmp\Facades\SnmpPoller;
 
 class SnmpPollerServiceProvider extends ServiceProvider
@@ -10,6 +11,7 @@ class SnmpPollerServiceProvider extends ServiceProvider
     public function boot() : void
     {
         $this->publishConfig();
+        $this->registerCommands();
     }
 
     public function register() : void
@@ -24,5 +26,14 @@ class SnmpPollerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../config/snmp.php' => $this->app->configPath('snmp.php')
         ], 'config');
+    }
+
+    private function registerCommands()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                PublishConfigCommand::class,
+            ]);
+        }
     }
 }
