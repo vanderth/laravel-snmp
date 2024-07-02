@@ -13,6 +13,7 @@ Before you run any SNMP query in your [Laravel](https://laravel.com/) applicatio
     - [Single SNMP Poller class](#single-snmp-poller-class)
     - [Multiple SNMP Pollers classes](#multiple-snmp-pollers-classes)
   - [Testing](#testing)
+  - [TODO](#todo)
   - [Changelog](#changelog)
   - [Security](#security)
   - [Standards](#standards)
@@ -325,6 +326,11 @@ For running the tests, in the console run:
 ```bash
 composer test
 ```
+
+## TODO
+
+- Add method toArray result of snmp
+- and more...
 
 ## Changelog
 
