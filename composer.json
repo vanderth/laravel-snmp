@@ -28,9 +28,6 @@
     "phpunit/phpunit": "^10.1"
   },
   "autoload": {
-    "files": [
-      "src/helpers.php"
-    ],
     "psr-4": {
       "Vanderth\\Snmp\\": "src/"
     }
