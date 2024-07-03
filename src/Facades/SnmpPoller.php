@@ -5,12 +5,12 @@ namespace Vanderth\Snmp\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method \Vanderth\Snmp\SnmpPoller setSnmpSession(\SNMP $session)
- * @method \Vanderth\Snmp\SnmpPoller newSession(int $version, string $host, string $community)
- * @method \Vanderth\Snmp\SnmpPoller addPoller(string $poller)
- * @method \Vanderth\Snmp\SnmpPoller addPollers(array $pollers)
- * @method array getPollers()
- * @method array run()
+ * @method static \Vanderth\Snmp\SnmpPoller setSnmpSession(\SNMP $session)
+ * @method static \Vanderth\Snmp\SnmpPoller newSession(int $version, string $host, string $community)
+ * @method static \Vanderth\Snmp\SnmpPoller addPoller(string $poller)
+ * @method static \Vanderth\Snmp\SnmpPoller addPollers(array $pollers)
+ * @method static array getPollers()
+ * @method static array run()
  * 
  * @see \Vanderth\Snmp\SnmpPoller
  */
