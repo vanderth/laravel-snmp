@@ -51,6 +51,38 @@ class SnmpPoller
     }
 
     /**
+     * Set new SNMP session
+     * 
+     * @param int $version
+     * @param string $host
+     * @param string $community
+     * 
+     * @return $this
+     */
+    public function newSession(int $version, string $host, string $community) : SnmpPoller
+    {
+        $this->session = new SNMP(
+            $this->getMatchVersion($version),
+            $host,
+            $community
+        );
+
+        $this->setSnmpSessionDefaultParameters();
+
+        return $this;
+    }
+
+    private function getMatchVersion(int $version) : int
+    {
+        return match ($version) {
+            1 => SNMP::VERSION_1,
+            2 => SNMP::VERSION_2c,
+            3 => SNMP::VERSION_3,
+            default => SNMP::VERSION_2c
+        };
+    }
+
+    /**
      * Adds a SNMP poller.
      *
      * @param string $poller
@@ -224,7 +256,7 @@ class SnmpPoller
         return [
             'code' => $this->session->getErrno(),
             'message' => $this->session->getError(),
-            'result' => 'Exception',
+            'result' => null,
         ];
     }
 
